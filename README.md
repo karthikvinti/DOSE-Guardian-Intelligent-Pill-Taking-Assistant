@@ -54,16 +54,30 @@ RTC, Keypad, and Switches provide inputs to the LPC2148 microcontroller. The con
 - ☑️Confirmation-based medicine intake  
 - ⚠️Missed-dose indication  
 
-## LCD Display Examples
+## 📸LCD Display 
+### 🖥️ Full Proteus Setup
+<img width="1282" height="905" alt="image" src="https://github.com/user-attachments/assets/418937d8-673c-49d0-a0d0-2fbfb58ca6c0" />
 
-10:30:45 MON  
-26/07/2025  
+### ⌚ Main Menu 
+<img width="857" height="350" alt="image" src="https://github.com/user-attachments/assets/3d92371f-d09a-4b0c-a3d7-d1415a804342" />
 
-TIME FOR  
-MEDICINE  
+### ✏️ Editing Menu (Time Configuration)
+> **Right ( > )** → Move between HH • MM • SS  
+>  
+> **Left ( < )** → Move backward  
+>  
+> **↑** → Increase value  
+>  
+> **↓** → Decrease value
+<img width="1278" height="520" alt="image" src="https://github.com/user-attachments/assets/217174b3-7a57-4635-b7b9-48f7659a0b6f" />
 
-MEDICINE  
-NOT TAKEN  
+## ⚠️ Known Issues
+- Setting ON/OFF Time at **00:00** behaves differently:  
+  - As **Day Start** for ON Time  
+  - As **Day End** for OFF Time  
+
+- Year field supports **1–4095**, but only **2025** is accepted for correct operation  
+  (Warning message alerts the user during editing).
 
 ## 🔑Keypad Controls
 
@@ -91,7 +105,8 @@ NOT TAKEN
    - **↓** → Decrement  
 5. Confirm inputs — invalid entries trigger warnings.  
 6. Exit to return to normal running mode with updated parameters.
-## Future Enhancements
+
+## 💡Future Enhancements
 
 - Multiple medicine schedules  
 - EEPROM or Flash memory storage  
@@ -100,12 +115,13 @@ NOT TAKEN
 - Voice reminders  
 - Low-power sleep mode  
 
-## Developed By
+## 👤Developed By
+**Karthik Vinti** 
+ 
+ Electronics and Communication Engineering
+ Developer of *DoseGuardian – Intelligent Pill-Taking Assistant* 
 
-Vinti Karthik  
-Embedded Systems | LPC2148 | ARM7 | Embedded C  
-
-## License
+## 📜License
 
 This project is developed for academic and learning purposes. You are free to modify and enhance it with proper credit.
 
