@@ -116,10 +116,10 @@ RTC, Keypad, and Switches provide inputs to the LPC2148 microcontroller. The con
 - Low-power sleep mode  
 
 ## 👤Developed By
+
 **Karthik Vinti** 
- 
- Electronics and Communication Engineering
- Developer of *DoseGuardian – Intelligent Pill-Taking Assistant* 
+Electronics and Communication Engineering
+Developer of *DoseGuardian – Intelligent Pill-Taking Assistant*
 
 ## 📜License
 
