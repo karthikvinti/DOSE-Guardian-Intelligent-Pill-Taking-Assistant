@@ -112,13 +112,13 @@ RTC, Keypad, and Switches provide inputs to the LPC2148 microcontroller. The con
 - EEPROM or Flash memory storage  
 - GSM or SMS alert system  
 - Mobile application integration  
-- Voice reminders  
+- Voice reminders
 - Low-power sleep mode  
 
 ## 👤Developed By
 
-**Karthik Vinti** 
-Electronics and Communication Engineering
+**Karthik Vinti**   
+Electronics and Communication Engineering  
 Developer of *DoseGuardian – Intelligent Pill-Taking Assistant*
 
 ## 📜License
