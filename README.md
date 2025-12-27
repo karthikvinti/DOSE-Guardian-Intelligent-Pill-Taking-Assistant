@@ -76,9 +76,6 @@ RTC, Keypad, and Switches provide inputs to the LPC2148 microcontroller. The con
   - As **Day Start** for ON Time  
   - As **Day End** for OFF Time  
 
-- Year field supports **1–4095**, but only **2025** is accepted for correct operation  
-  (Warning message alerts the user during editing).
-
 ## 🔑Keypad Controls
 
 | Key | Function |
