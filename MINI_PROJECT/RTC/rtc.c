@@ -84,7 +84,7 @@ void DisplayRTCDate(u32 date, u32 month, u32 year)
 // Function to read current day of week from RTC
 void GetRTCDay(s32 *day)
 {
-	*day = DOW;      // Read day-of-week value (0–6) from RTC
+	*day = DOW;      // Read day-of-week value (0â€“6) from RTC
 }
 
 // Function to display day of week on LCD
@@ -101,8 +101,8 @@ void menu()
 	   InitLCD();                    // Re-initialize LCD
 	   WriteToCGRAM();               // Load custom characters into LCD CGRAM
 	   d:CmdLCD(CLEAR_LCD);          // Label 'd' used for re-displaying menu, clear LCD
-		 CmdLCD(GOTO_LINE1_POS0);      // Move cursor to line 1, position 0
-		 StrLCD("1.E.Time  3.Exit");   // Display menu options on first line
+	   CmdLCD(GOTO_LINE1_POS0);      // Move cursor to line 1, position 0
+	   StrLCD("1.E.Time  3.Exit");   // Display menu options on first line
 	   CmdLCD(GOTO_LINE2_POS0);      // Move cursor to line 2, position 0
 	   StrLCD("2.Set_Med_Time");     // Display second menu option
 	
@@ -118,20 +118,20 @@ void menu()
 						            return;                     // Exit menu function
 						 
 						 case '2' : set_med_time();             // Call function to set medicine time
-												CmdLCD(CLEAR_LCD);          // Clear LCD
+                                    CmdLCD(CLEAR_LCD);          // Clear LCD
 						            return;                     // Exit menu function
 						 
 						 case '3' : CmdLCD(CLEAR_LCD);          // Clear LCD
-												StrLCD("Time Updated!");    // Display Time Updated message
-												delay_ms(500);              // Delay to show message
+									StrLCD("Time Updated!");    // Display Time Updated message
+									delay_ms(500);              // Delay to show message
 						            CmdLCD(CLEAR_LCD);	        // Clear LCD
-							          return;                     // Exit menu function
+							        return;                     // Exit menu function
 						 
 						 default : CmdLCD(CLEAR_LCD);           // Clear LCD for error message
-											 CmdLCD(GOTO_LINE1_POS0);     // Move cursor to line 1
-											 StrLCD("This key");          // Display error text
-											 CmdLCD(GOTO_LINE2_POS0);     // Move cursor to line 2
-											 StrLCD("is not used");       // Display error tex
+								   CmdLCD(GOTO_LINE1_POS0);     // Move cursor to line 1
+								   StrLCD("This key");          // Display error text
+								   CmdLCD(GOTO_LINE2_POS0);     // Move cursor to line 2
+								   StrLCD("is not used");       // Display error tex
 						           delay_ms(800);               // Delay so user can read message
 						           goto d;                      // Go back to menu display
 					 }
@@ -144,45 +144,45 @@ void edit_time()
 {
 	  s8 choice;                  // Variable to store keypad input
 	  k:CmdLCD(CLEAR_LCD);        // Label 'k' used to return to edit menu, clear LCD
-		delay_ms(10);               // Small delay for LCD stability
-		CmdLCD(GOTO_LINE1_POS0);    // Move cursor to line 1, position 0
-		StrLCD("1.Time   2.Date");  // Display options for time and date
-		CmdLCD(GOTO_LINE2_POS0);    // Move cursor to line 2, position 0
-		StrLCD("3.Day    4.Back");  // Display options for day and back
+	  delay_ms(10);               // Small delay for LCD stability
+	  CmdLCD(GOTO_LINE1_POS0);    // Move cursor to line 1, position 0
+	  StrLCD("1.Time   2.Date");  // Display options for time and date
+	  CmdLCD(GOTO_LINE2_POS0);    // Move cursor to line 2, position 0
+	  StrLCD("3.Day    4.Back");  // Display options for day and back
 	  
-     while(1)              // Infinite loop to wait for user input
-		 {	
-			   choice = get_key();  // Read key pressed from keypad
+      while(1)              // Infinite loop to wait for user input
+	  {	
+		   choice = get_key();  // Read key pressed from keypad
 	       if(choice != '\0')   // Check if a valid key is pressed
-				 { 
+		   { 
 	           switch(choice)   // Perform action based on key pressed
-						 {
-						     case '1' : set_time();          // Call function to set time
-							              CmdLCD(CLEAR_LCD);   // Clear LCD after operation
-			                      return;              // Exit edit_time function
+			   {
+					 case '1' : set_time();     // Call function to set time
+					 CmdLCD(CLEAR_LCD);        // Clear LCD after operation
+			         return;                   // Exit edit_time function
 							 
-							   case '2' : set_date();          // Call function to set date
-							              CmdLCD(CLEAR_LCD);   // Clear LCD after operation
-							              return;              // Exit edit_time function
+					 case '2' : set_date();   // Call function to set date
+					 CmdLCD(CLEAR_LCD);       // Clear LCD after operation
+					 return;                 // Exit edit_time function
 							 
-                 case '3' : set_day();           // Call function to set day
-							              CmdLCD(CLEAR_LCD);   // Clear LCD after operation
-							              return;              // Exit edit_time function
+                     case '3' : set_day();   // Call function to set day
+					 CmdLCD(CLEAR_LCD);      // Clear LCD after operation
+					 return;                 // Exit edit_time function
 							 
-							   case '4' : CmdLCD(CLEAR_LCD);   // Clear LCD
-														StrLCD("Updated!");  // Display Updated message
-														delay_ms(500);       // Delay to show message
-									          return;              // Go back to previous menu
+					 case '4' : CmdLCD(CLEAR_LCD);   // Clear LCD
+					 StrLCD("Updated!");  // Display Updated message
+					 delay_ms(500);       // Delay to show message
+					 return;              // Go back to previous menu
 							 
-							   default : CmdLCD(CLEAR_LCD);         // Clear LCD for error message
-													 CmdLCD(GOTO_LINE1_POS0);   // Move cursor to first line
-													 StrLCD("This key");        // Display error text
-													 CmdLCD(GOTO_LINE2_POS0);   // Move cursor to second line
-													 StrLCD("is not used");     // Display error text
-							             delay_ms(500);             // Delay so user can read message
-							             goto k;                    // Go back to edit menu
-             }
-				}
+					 default : CmdLCD(CLEAR_LCD); // Clear LCD for error message
+					 CmdLCD(GOTO_LINE1_POS0);   // Move cursor to first line
+					 StrLCD("This key");        // Display error text
+					 CmdLCD(GOTO_LINE2_POS0);   // Move cursor to second line
+					 StrLCD("is not used");     // Display error text
+				     delay_ms(500);             // Delay so user can read message
+					 goto k;                    // Go back to edit menu
+               }
+		 }
 	  }
 }
 
@@ -201,105 +201,105 @@ int set_time(void)
 	  CmdLCD(GOTO_LINE2_POS0+12);         // Move cursor to line 2, position 12
 	  CharLCD(0);                         // Display Up arrow which is custom character (from CGRAM)
 	  while(1)                            // Infinite loop for time editing
-		{
+	  {
 	     CmdLCD(GOTO_LINE1_POS0+4);       // Move cursor to time display position
 	     CharLCD((h/10)+48);              // Display tens digit of hour
-		   CharLCD((h%10)+48);              // Display units digit of hour
-		   CharLCD(':');                    // Display colon separator
-		   CharLCD((m/10)+48);              // Display tens digit of minute
-		   CharLCD((m%10)+48);              // Display units digit of minute
-		   CharLCD(':');                    // Display colon separator
-		   CharLCD((s/10)+48);              // Display tens digit of second
-		   CharLCD((s%10)+48);              // Display units digit of second
+		 CharLCD((h%10)+48);              // Display units digit of hour
+		 CharLCD(':');                    // Display colon separator
+	     CharLCD((m/10)+48);              // Display tens digit of minute
+	     CharLCD((m%10)+48);              // Display units digit of minute
+	     CharLCD(':');                    // Display colon separator
+	     CharLCD((s/10)+48);              // Display tens digit of second
+	     CharLCD((s%10)+48);              // Display units digit of second
 	      
-			 if(i==1)                         // If hour field is selected
-			 {
-				 CmdLCD(GOTO_LINE1_POS0+4);     // Move cursor to hour position
+		 if(i==1)                         // If hour field is selected
+		 {
+		     CmdLCD(GOTO_LINE1_POS0+4);     // Move cursor to hour position
 		     StrLCD("  ");	                // Blink hour field
-			 }
+		 }
 			 
-			 else if(i==2)                    // If minute field is selected
-			 {
-				  CmdLCD(GOTO_LINE1_POS0+7);    // Move cursor to minute position
+		 else if(i==2)                    // If minute field is selected
+		 {
+			  CmdLCD(GOTO_LINE1_POS0+7);    // Move cursor to minute position
 		      StrLCD("  ");                 // Blink minute field
-			 }
+		 }
 			 
-			 else if(i==3)                    // If second field is selected
-			 {
-				  CmdLCD(GOTO_LINE1_POS0+10);   // Move cursor to second position
-		      StrLCD("  ");                 // Blink second field
-			 }
+		 else if(i==3)                    // If second field is selected
+		 {
+			 CmdLCD(GOTO_LINE1_POS0+10);   // Move cursor to second position
+		     StrLCD("  ");                 // Blink second field
+		 }
        
-          key = get_key();              // Read key pressed from keypad
-			    if(key != '\0')               // Check if a valid key is pressed
-					{
-						 switch(key)                // Perform action based on key
-						 {
-								 case 'D' : if(i == 1)  // Hour selected
-								            {
-															if((h>=0)&&(h<=22))  // Hour range within 0 t0 23
-															{
-															  h++;    // Increase hour
-															}
-															else{
-																h=0;   // Reset hour
-															}
-														}
-														else if(i == 2)   // Minute selected
-														{
-														   if((m>=0)&&(m<=58))  // Minutes range in 0 to 59
-														   {
-															    m++;   // Increase minute
-														   }
-															 else{
-																	m = 0;  // Reset minute
-															 }
-														}
-														else if(i == 3)   // Second selected
-														{
-														   if((s>=0)&&(s<=58))  //Seconds range in 0 to 59
-														   {
-															    s++;     // Increase second
-														   }
-															 else{
-																	s = 0;   // Reset second
-															 }
-														}
-														break;           // Exit switch case
+         key = get_key();              // Read key pressed from keypad
+		 if(key != '\0')               // Check if a valid key is pressed
+		 {
+			 switch(key)                // Perform action based on key
+			 {
+					case 'D' : if(i == 1)  // Hour selected
+							   {
+								  if((h>=0)&&(h<=22))  // Hour range within 0 t0 23
+								  {
+										h++;    // Increase hour
+								  }
+								  else{
+										h=0;   // Reset hour
+								  }
+								}
+								else if(i == 2)   // Minute selected
+								{
+									if((m>=0)&&(m<=58))  // Minutes range in 0 to 59
+								    {
+										 m++;   // Increase minute
+									}
+								 else{
+										m = 0;  // Reset minute
+									}
+								}
+								else if(i == 3)   // Seconds selected
+								{
+									if((s>=0)&&(s<=58))  //Seconds range in 0 to 59
+									{
+										s++;     // Increase second
+									}
+									else{
+										s = 0;   // Reset second
+										}
+								 }
+								 break;           // Exit switch case
 														
 							   case 'C' : if(i == 1)       // Hour selected
-								            {
-															if(h==0)
-															{
-															   h=23;       // Wrap hour
-															}
-															else{
-																   h--;      // Decrease hour
-															   } 
-														}
-														else if(i == 2)  // Minute selected
-								            {
-															if(m==0)
-															{
-															   m=59;        // Wrap minute
-															}
-															else{
-																   m--;       // Decrease minute
-															   } 
-														}
-														else if(i == 3)   // Second selected
-								            {
-															if(s==0)
-															{
-															   s=59;        // Wrap second
-															}
-															else{
-																   s--;       // Decrease second
-															   } 
-														}
-														break;       // Exit switch case
+								{
+									if(h==0)
+									{
+										h=23;       // Wrap hour
+									}
+									else{
+										 h--;      // Decrease hour
+									} 
+								 }
+								 else if(i == 2)  // Minute selected
+								 {
+										if(m==0)
+										{
+										   m=59;        // Wrap minute
+										}
+										else{
+											m--;       // Decrease minute
+										} 
+								  }
+								  else if(i == 3)   // Second selected
+								  {
+										if(s==0)
+										{
+											s=59;        // Wrap second
+										}
+									    else{
+											s--;       // Decrease second
+											} 
+								  }
+								  break;       // Exit switch case
 														
-							   case 'A' : if(i == 3)   // Move selection forward
+							    case 'A' : if(i == 3)   // Move selection forward
 									          { 
 																i = 1;   // Go back to hour
 														}
@@ -310,7 +310,7 @@ int set_time(void)
 														break;       // Exit switch case
 														
 			   				 case 'B' : if(i == 1)   // Move selection backward
-									         {
+									    {
 																i = 3;   // Go to second field
 														}
 														else{
@@ -503,7 +503,7 @@ int set_day(void)
 {
 	   int day = DOW,i=1;             // Store current RTC day and selection flag
 	   char key;                      // Variable to store keypad input
-	   s32 count=0;                   // Variable to track selected day (0–6)
+	   s32 count=0;                   // Variable to track selected day (0â€“6)
 	   CmdLCD(CLEAR_LCD);             // Clear LCD screen
 	   CmdLCD(GOTO_LINE1_POS0);       // Move cursor to line 1, position 0
 	   CharLCD('<');                  // Display left arrow
@@ -612,7 +612,7 @@ void set_med_time()
 						 {
 								 case 'D' : if(i == 1)  // If hour field is selected
 								            {
-															if((set_t>=0)&&(set_t<=22))  // Check hour range (0–23)
+															if((set_t>=0)&&(set_t<=22))  // Check hour range (0â€“23)
 															{
 															  set_t++;                   // Increase hour by 1
 															}
@@ -622,7 +622,7 @@ void set_med_time()
 														}
 														else if(i == 2)                // If minute field is selected
 														{
-														   if((set_m>=0)&&(set_m<=58))  // Check minute range (0–59)
+														   if((set_m>=0)&&(set_m<=58))  // Check minute range (0â€“59)
 														   {
 															    set_m++;                  // Increase minute by 1
 														   }
@@ -632,7 +632,7 @@ void set_med_time()
 														}
 														else if(i == 3)                // If second field is selected
 														{
-														   if((set_s>=0)&&(set_s<=58)) // Check second range (0–59)
+														   if((set_s>=0)&&(set_s<=58)) // Check second range (0â€“59)
 														   {
 															    set_s++;                 // Increase second by 1
 														   }
@@ -777,3 +777,4 @@ void match_time()
        IOSET1 = 1<<LED1;                   // Turn ON Red LED to indicate missed medicine
 		}
 }
+
