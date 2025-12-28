@@ -299,42 +299,42 @@ int set_time(void)
 								  }
 								  break;       // Exit switch case
 														
-							    case 'A' : if(i == 3)   // Move selection forward
-									          { 
-																i = 1;   // Go back to hour
-														}
-														else 
-														{
-																i++;     // Move to next field
-														}
-														break;       // Exit switch case
+							     case 'A' : if(i == 3)   // Move selection forward
+									        { 
+												i = 1;   // Go back to hour
+											}
+											else 
+											{
+												i++;     // Move to next field
+											}
+											break;       // Exit switch case
 														
-			   				 case 'B' : if(i == 1)   // Move selection backward
-									    {
-																i = 3;   // Go to second field
-														}
-														else{
-																i--;     // Move to previous field
-														}
-														break;       // Exit switch case
+			   				     case 'B' : if(i == 1)   // Move selection backward
+									        {
+												 i = 3;   // Go to second field
+											}
+											else{
+													i--;     // Move to previous field
+												}
+												break;       // Exit switch case
 														
-							 case '=' :                // Save updated time
-								          HOUR = h;      // Update RTC hour
-													MIN = m;       // Update RTC minute
-													SEC = s;       // Update RTC second
-													CmdLCD(CLEAR_LCD);        // Clear LCD
-													StrLCD("Time Updated!");  // Confirmation message
-													delay_ms(500);            // Delay to show message
-													return 0;                 // Exit function
+							     case '=' :                // Save updated time
+								            HOUR = h;      // Update RTC hour
+											MIN = m;       // Update RTC minute
+											SEC = s;       // Update RTC second
+											CmdLCD(CLEAR_LCD);        // Clear LCD
+											StrLCD("Time Updated!");  // Confirmation message
+											delay_ms(500);            // Delay to show message
+											return 0;                 // Exit function
 														
-								default :                           // If invalid key is pressed
+								  default :                           // If invalid key is pressed
 									        CmdLCD(CLEAR_LCD);        // Clear LCD
-													CmdLCD(GOTO_LINE1_POS0);  // Move cursor to first line
-													StrLCD("This key");       // Display error message
-													CmdLCD(GOTO_LINE2_POS0);  // Move cursor to second line
-													StrLCD("is not used");    // Display error message
-													delay_ms(500);            // Delay to show message
-													goto c;                   // Return to time edit screen
+											CmdLCD(GOTO_LINE1_POS0);  // Move cursor to first line
+											StrLCD("This key");       // Display error message
+											CmdLCD(GOTO_LINE2_POS0);  // Move cursor to second line
+											StrLCD("is not used");    // Display error message
+											delay_ms(500);            // Delay to show message
+											goto c;                   // Return to time edit screen
 						 }
 					}
 		}
@@ -355,144 +355,144 @@ int set_date(void)
 	  CmdLCD(GOTO_LINE2_POS0+12);          // Move cursor to line 2, position 12
 	  CharLCD(0);                          // Display Up arrow which is custom character (from CGRAM)
 	  while(1)                             // Infinite loop for date editing
-		{
+	  {
 	     CmdLCD(GOTO_LINE1_POS0+3	);       // Move cursor to date display position
 	     CharLCD((d/10)+48);               // Display tens digit of date
-		   CharLCD((d%10)+48);               // Display units digit of date
-		   CharLCD('/');                     // Display date separator
-		   CharLCD((m/10)+48);               // Display tens digit of month
-		   CharLCD((m%10)+48);               // Display units digit of month
-		   CharLCD('/');                     // Display date separator
-			 add_leading_zeros(count_digits(y));   // Add leading zeros before year
-			 IntLCD(y);                        // Display year value
+		 CharLCD((d%10)+48);               // Display units digit of date
+		 CharLCD('/');                     // Display date separator
+		 CharLCD((m/10)+48);               // Display tens digit of month
+		 CharLCD((m%10)+48);               // Display units digit of month
+		 CharLCD('/');                     // Display date separator
+		 add_leading_zeros(count_digits(y));   // Add leading zeros before year
+		 IntLCD(y);                        // Display year value
 	      
-			 if(i==1)                       // If date field is selected
-			 {
-				 CmdLCD(GOTO_LINE1_POS0+3);   // Move cursor to date field
+		 if(i==1)                       // If date field is selected
+		 {
+			 CmdLCD(GOTO_LINE1_POS0+3);   // Move cursor to date field
 		     StrLCD("  ");	              // Blink date field
-			 }
+		 }
 			 
-			 else if(i==2)                  // If month field is selected
-			 {
-				  CmdLCD(GOTO_LINE1_POS0+6);  // Move cursor to month field
+		 else if(i==2)                  // If month field is selected
+		 {
+			  CmdLCD(GOTO_LINE1_POS0+6);  // Move cursor to month field
 		      StrLCD("  ");               // Blink month field
-			 }
+		 }
 			 
-			 else if(i==3)                  // If year field is selected
-			 {
-				  CmdLCD(GOTO_LINE1_POS0+9);  // Move cursor to year field
+		 else if(i==3)                  // If year field is selected
+		 {
+			  CmdLCD(GOTO_LINE1_POS0+9);  // Move cursor to year field
 		      StrLCD("    ");             // Blink year field
-			 }
+		 }
        
           key = get_key();      // Read key from keypad
 			    if(key != '\0')       // Check if a valid key is pressed
-					{
-						 switch(key)        // Perform action based on key
-						 {
-								 case 'D' :                          // Increment selected field
-									          if(i == 1)               // Date selected
-								            {
-															if((d>=1)&&(d<=30))
-															{
-															  d++;                 // Increase date
-															}
-															else{
-																d=1;                 // Reset date
-															}
-														}
-														else if(i == 2)          // Month selected
-														{
-														   if((m>=1)&&(m<=11))
-														   {
-															    m++;               // Increase month
-														   }
-															 else{
-																	m = 1;             // Reset month
-															 }
-														}
-														else if(i == 3)          // Year selected
-														{
-														   if((y>=0)&&(y<=4095))
-														   {
-															    y++;               // Increase year
-														   }
-															 else{
-																	y = 0;             // Reset year
-															 }
-														}
-														break;                  // Exit switch case
+				{
+					 switch(key)        // Perform action based on key
+					 {
+						 case 'D' :                          // Increment selected field
+									if(i == 1)               // Date selected
+								    {
+										if((d>=1)&&(d<=30))
+										{
+											 d++;                 // Increase date
+										}
+										else{
+											 d=1;                 // Reset date
+										}
+									 }
+									 else if(i == 2)          // Month selected
+									 {
+										 if((m>=1)&&(m<=11))
+										 {
+											 m++;               // Increase month
+										 }
+										 else{
+											 m = 1;             // Reset month
+										 }
+									  }
+									  else if(i == 3)          // Year selected
+									  {
+											if((y>=0)&&(y<=4095))
+											{
+												 y++;               // Increase year
+											}
+											else{
+												 y = 0;             // Reset year
+											}
+									  }
+									  break;                  // Exit switch case
 														
 							   case 'C' :                         // Decrement selected field
-									          if(i == 1)              // Date selected
+									      if(i == 1)              // Date selected
+								          {
+											 if(d==1)
+											 {
+												d=31;               // Wrap date
+											 }
+										     else{
+												  d--;              // Decrease date
+											  } 
+										   }
+										   else if(i == 2)          // Month selected
+								           {
+												if(m==1)              
+												{
+													m=12;               // Wrap month
+												}
+												else{
+													m--;              // Decrease month
+												} 
+											}
+											else if(i == 3)          // Year selected
 								            {
-															if(d==1)
-															{
-															   d=31;               // Wrap date
-															}
-															else{
-																   d--;              // Decrease date
-															   } 
-														}
-														else if(i == 2)          // Month selected
-								            {
-															if(m==1)              
-															{
-															   m=12;               // Wrap month
-															}
-															else{
-																   m--;              // Decrease month
-															   } 
-														}
-														else if(i == 3)          // Year selected
-								            {
-															if(y==0)
-															{
-															   y=4095;             // Wrap year
-															}
-															else{
-																   y--;              // Decrease year
-															   } 
-														}
-														break;                // Exit switch case
+												if(y==0)
+												{
+													y=4095;             // Wrap year
+												}
+												else{
+													y--;              // Decrease year
+												} 
+											 }
+											 break;                // Exit switch case
 														
 							   case 'A' :                       // Move selection forward
-									          if(i == 3)
-									          {
-																i = 1;            // Move back to date
-														}
-														else 
-														{
-																i++;              // Move to next field
-														}
-														break;
+									      if(i == 3)
+									      {
+											  i = 1;            // Move back to date
+										  }
+										  else 
+										  {
+											   i++;              // Move to next field
+										  }
+										  break;
 														
 			   				 case 'B' :                      // Move selection backward
-									         if(i == 1)
-									         {
-																i = 3;           // Move to year
-														}
-														else{
-																i--;             // Move to previous field
-														}
-														break;              // Exit switch case
+									    if(i == 1)
+									    {
+											i = 3;           // Move to year
+										}
+										else{
+											i--;             // Move to previous field
+										}
+										break;              // Exit switch case
 														
 							   case '=' :                     // Save date into RTC
-									          DOM = d;            // Update day of month
-												  	MONTH = m;          // Update month
-													  YEAR = y;           // Update year
-														CmdLCD(CLEAR_LCD);  // Clear LCD
-														StrLCD("Date Updated!");  // Confirmation message
-														delay_ms(500);        // Delay to show message
-													  return 0;             // Exit function
+									      DOM = d;            // Update day of month
+										  MONTH = m;          // Update month
+										  YEAR = y;           // Update year
+										  CmdLCD(CLEAR_LCD);  // Clear LCD
+										  StrLCD("Date Updated!");  // Confirmation message
+										  delay_ms(500);        // Delay to show message
+										  return 0;             // Exit function
 														
 								 default :                           // Invalid key pressed
-									         CmdLCD(CLEAR_LCD);        // Clear LCD
-													 CmdLCD(GOTO_LINE1_POS0);
-													 StrLCD("This key");       // Display error message
-													 CmdLCD(GOTO_LINE2_POS0);
-													 StrLCD("is not used");    // Display error message
-													 delay_ms(500);            // Delay for readability
-													 goto b;                   // Return to date edit screen
+									        CmdLCD(CLEAR_LCD);        // Clear LCD
+											CmdLCD(GOTO_LINE1_POS0);
+											StrLCD("This key");       // Display error message
+											CmdLCD(GOTO_LINE2_POS0);
+											StrLCD("is not used");    // Display error message
+											delay_ms(500);            // Delay for readability
+											goto b;                   // Return to date edit screen
 						 }
 					}
 		}
@@ -528,31 +528,31 @@ int set_day(void)
 					switch(key)               // Perform action based on key
 					{
 						case 'D' :               // Increment day
-							         if(count==6)
+							       if(count==6)
 						           {
-												   count=0;  // Wrap to Sunday
-											 }
-											 else{
-												 count++;    // Move to next day
-											 }
-											 break;        // Exit switch case
+										count=0;  // Wrap to Sunday
+								   }
+								   else{
+										 count++;    // Move to next day
+									}
+								    break;        // Exit switch case
 											 
-						case 'C' :               // Decrement day
-							         if(count==0)
-						           {
-												   count=6;  // Wrap to Saturday
-											 }
-											 else{
-												 count--;    // Move to previous day
-											 }
-                       break;	       // Exit switch case
+						 case 'C' :               // Decrement day
+							        if(count==0)
+						            {
+										count=6;  // Wrap to Saturday
+									}
+									else{
+										count--;    // Move to previous day
+									}
+                                    break;	       // Exit switch case
  
-            case '=' :              // Save selected day
-							         DOW = count;             // Update RTC day register
-											 CmdLCD(CLEAR_LCD);       // Clear LCD
-											 StrLCD("Day Updated!");  // Show confirmation
-											 delay_ms(500);           // Delay to display message
-											 return 0;		            // Exit function
+                         case '=' :              // Save selected day
+							        DOW = count;             // Update RTC day register
+								    CmdLCD(CLEAR_LCD);       // Clear LCD
+									StrLCD("Day Updated!");  // Show confirmation
+									delay_ms(500);           // Delay to display message
+								    return 0;		            // Exit function
 											 
 					}
 			 }
@@ -575,140 +575,140 @@ void set_med_time()
 	  CharLCD(1);                             // Display custom character
 	  CmdLCD(GOTO_LINE2_POS0+12);             // Move cursor to line 2, position 12
 	  CharLCD(0);                             // Display custom character
-    while(1)
-		{
+      while(1)
+	  {
 	     CmdLCD(GOTO_LINE1_POS0+4);           // Move cursor to time display position
 	     CharLCD((set_t/10)+48);              // Display tens digit of hour
-		   CharLCD((set_t%10)+48);              // Display units digit of hour
-		   CharLCD(':');                        // Display colon
-		   CharLCD((set_m/10)+48);              // Display tens digit of minute
-		   CharLCD((set_m%10)+48);              // Display units digit of minute
-		   CharLCD(':');                        // Display colon
-		   CharLCD((set_s/10)+48);              // Display tens digit of second
-		   CharLCD((set_s%10)+48);              // Display units digit of second
+		 CharLCD((set_t%10)+48);              // Display units digit of hour
+		 CharLCD(':');                        // Display colon
+		 CharLCD((set_m/10)+48);              // Display tens digit of minute
+		 CharLCD((set_m%10)+48);              // Display units digit of minute
+		 CharLCD(':');                        // Display colon
+		 CharLCD((set_s/10)+48);              // Display tens digit of second
+		 CharLCD((set_s%10)+48);              // Display units digit of second
 	       
-			 if(i==1)                      // If hour field selected
-			 {
-				 CmdLCD(GOTO_LINE1_POS0+4);
+		 if(i==1)                      // If hour field selected
+		 {
+			 CmdLCD(GOTO_LINE1_POS0+4);
 		     StrLCD("  ");	              // Blink hour field
-			 }
+		 }
 			  
-			 else if(i==2)                  // If minute field selected
-			 {
-				  CmdLCD(GOTO_LINE1_POS0+7);
+		 else if(i==2)                  // If minute field selected
+		 {
+			  CmdLCD(GOTO_LINE1_POS0+7);
 		      StrLCD("  ");               // Blink minute field
-			 }
+		 }
 			 
-			 else if(i==3)                   // If second field selected
-			 {
-				  CmdLCD(GOTO_LINE1_POS0+10);
-		      StrLCD("  ");                // Blink second field
-			 }
+		 else if(i==3)                   // If second field selected
+		 {
+			 CmdLCD(GOTO_LINE1_POS0+10);
+		     StrLCD("  ");                // Blink second field
+		 }
 			 
-			  key = get_key();              // Read key from keypad
-			    if(key != '\0')             // Check if valid key is pressed
-					{
-						 switch(key)              // Perform action based on key
-						 {
-								 case 'D' : if(i == 1)  // If hour field is selected
-								            {
-															if((set_t>=0)&&(set_t<=22))  // Check hour range (0–23)
-															{
-															  set_t++;                   // Increase hour by 1
-															}
-															else{
-																set_t=0;                   // If limit crossed, reset hour to 0
-															}
-														}
-														else if(i == 2)                // If minute field is selected
-														{
-														   if((set_m>=0)&&(set_m<=58))  // Check minute range (0–59)
-														   {
-															    set_m++;                  // Increase minute by 1
-														   }
-															 else{
-																	set_m = 0;                // If limit crossed, reset minute to 0
-															 }
-														}
-														else if(i == 3)                // If second field is selected
-														{
-														   if((set_s>=0)&&(set_s<=58)) // Check second range (0–59)
-														   {
-															    set_s++;                 // Increase second by 1
-														   }
-															 else{
-																	set_s = 0;               // If limit crossed, reset second to 0
-															 }
-														}
-														break;                         // Exit switch case
+		  key = get_key();              // Read key from keypad
+		  if(key != '\0')             // Check if valid key is pressed
+		  {
+				switch(key)              // Perform action based on key
+				{
+					 case 'D' : if(i == 1)  // If hour field is selected
+								{
+									if((set_t>=0)&&(set_t<=22))  // Check hour range (0–23)
+									{
+										set_t++;                   // Increase hour by 1
+									}
+									else{
+										set_t=0;                   // If limit crossed, reset hour to 0
+									}
+								}
+								else if(i == 2)                // If minute field is selected
+								{
+									 if((set_m>=0)&&(set_m<=58))  // Check minute range (0–59)
+									 {
+										 set_m++;                  // Increase minute by 1
+									 }
+								 else{
+									   set_m = 0;                // If limit crossed, reset minute to 0
+									}
+								}
+							    else if(i == 3)                // If second field is selected
+								{
+									if((set_s>=0)&&(set_s<=58)) // Check second range (0–59)
+								    {
+										 set_s++;                 // Increase second by 1
+									}
+								    else{
+										 set_s = 0;               // If limit crossed, reset second to 0
+									}
+								 }
+								 break;                         // Exit switch case
 														
 							   case 'C' : if(i == 1)             // If hour field is selected
+								          {
+											  if(set_t==0)         // If hour is already 0
+											  {
+													set_t=23;         // Wrap around to 23
+											  }
+											  else{
+												    set_t--;        // Decrease hour by 1
+											  } 
+										   }
+										   else if(i == 2)        // If minute field is selected
+								           {
+												if(set_m==0)         // If minute is already 0
+												{
+													set_m=59;         // Wrap around to 59
+												}
+												else{
+												    set_m--;        // Decrease minute by 1
+												} 
+											}
+											else if(i == 3)        // If second field is selected
 								            {
-															if(set_t==0)         // If hour is already 0
-															{
-															   set_t=23;         // Wrap around to 23
-															}
-															else{
-																   set_t--;        // Decrease hour by 1
-															   } 
-														}
-														else if(i == 2)        // If minute field is selected
-								            {
-															if(set_m==0)         // If minute is already 0
-															{
-															   set_m=59;         // Wrap around to 59
-															}
-															else{
-																   set_m--;        // Decrease minute by 1
-															   } 
-														}
-														else if(i == 3)        // If second field is selected
-								            {
-															if(set_s==0)         // If second is already 0
-															{
-															   set_s=59;         // Wrap around to 59
-															}
-															else{
-																   set_s--;        // Decrease second by 1
-															   } 
-														}
-														break;                 // Exit switch case
+												if(set_s==0)         // If second is already 0
+												{
+													set_s=59;         // Wrap around to 59
+												}
+												else{
+													set_s--;        // Decrease second by 1
+												} 
+											 }
+											 break;                 // Exit switch case
 														
 							   case 'A' : if(i == 3)            // If currently at second field
-									          {
-																i = 1;            // Move back to hour field
-														}
-														else 
-														{
-																i++;              // Move to next field
-														}    
-														break;                // Exit switch case
+									      {
+											i = 1;            // Move back to hour field
+										  }
+										  else 
+										  {
+											 i++;              // Move to next field
+										  }    
+										  break;                // Exit switch case
 														
-			   				 case 'B' : if(i == 1)           // If currently at hour field
-									         {
-																i = 3;           // Move to second field
-														}
-														else{
-																i--;             // Move to previous field
-														}
-														break;
+			   				  case 'B' : if(i == 1)           // If currently at hour field
+									     {
+											i = 3;           // Move to second field
+										 }
+										 else{
+											i--;             // Move to previous field
+										 }
+										 break;
 														
-							 case '=' : CmdLCD(CLEAR_LCD);           // Clear LCD screen
-													CmdLCD(GOTO_LINE1_POS0+4);   // Move cursor to middle of line 1
-													StrLCD("MEDICINE");          // Display text "MEDICINE"
-													CmdLCD(GOTO_LINE2_POS0+4);   // Move cursor to middle of line 2
-													StrLCD("TIME SET");          // Display confirmation message
-													delay_ms(700);               // Delay so user can read message
-													IOCLR1 = (1<<LED1)|(1<<LED2); // Clearing the two LED's
-								          return ;                     // Exit function after saving time
+							  case '=' : CmdLCD(CLEAR_LCD);           // Clear LCD screen
+										 CmdLCD(GOTO_LINE1_POS0+4);   // Move cursor to middle of line 1
+										 StrLCD("MEDICINE");          // Display text "MEDICINE"
+										 CmdLCD(GOTO_LINE2_POS0+4);   // Move cursor to middle of line 2
+										 StrLCD("TIME SET");          // Display confirmation message
+										 delay_ms(700);               // Delay so user can read message
+										 IOCLR1 = (1<<LED1)|(1<<LED2); // Clearing the two LED's
+								         return ;                     // Exit function after saving time
 														
-							 default : CmdLCD(CLEAR_LCD);            // Clear LCD screen
-												 CmdLCD(GOTO_LINE1_POS0);      // Move cursor to line 1
-												 StrLCD("This key");           // Display error message
-												 CmdLCD(GOTO_LINE2_POS0);      // Move cursor to line 2
-												 StrLCD("is not used");        // Display error message
-												 delay_ms(500);                // Delay for readability
-												 goto a;                       // Go back to medicine time setting screen
+							  default : CmdLCD(CLEAR_LCD);            // Clear LCD screen
+										CmdLCD(GOTO_LINE1_POS0);      // Move cursor to line 1
+										StrLCD("This key");           // Display error message
+										CmdLCD(GOTO_LINE2_POS0);      // Move cursor to line 2
+										StrLCD("is not used");        // Display error message
+									    delay_ms(500);                // Delay for readability
+										goto a;                       // Go back to medicine time setting screen
 						 }
 					}
 		 }			 
@@ -726,7 +726,7 @@ s32 count_digits(int year_count)
 {
 	  s32 count = 0;      // Variable to store digit count
 	  while(year_count)   // Loop until number becomes zero
-		{
+	  {
 		  count++;          // Increase digit count
 		  year_count /= 10; // Remove last digit
 	  }
@@ -737,12 +737,12 @@ s32 count_digits(int year_count)
 void match_time()
 {
     s32 count = 200;     // Counter used to limit waiting time
-	  u8 flag = 0;         // Flag to indicate whether medicine was taken
+	u8 flag = 0;         // Flag to indicate whether medicine was taken
     CmdLCD(CLEAR_LCD);   // Clear LCD screen
     CmdLCD(GOTO_LINE1_POS0+4);  // Move cursor to center of first line
     StrLCD("TIME FOR");         // Display alert message
-	  CmdLCD(GOTO_LINE2_POS0+4);  // Move cursor to center of second line
-	  StrLCD("MEDICINE");         // Display alert message
+	CmdLCD(GOTO_LINE2_POS0+4);  // Move cursor to center of second line
+	StrLCD("MEDICINE");         // Display alert message
     delay_ms(700);              // Delay so user can read message
     IOSET1 = 1<<BUZ;            // Turn ON buzzer to alert user
     while(count)                // Loop until counter becomes zero
@@ -751,30 +751,31 @@ void match_time()
        if(!(READBIT(IOPIN0,17)))          // Check if medicine confirmation switch is pressed
        {
            while(!(READBIT(IOPIN0,17)));  // Wait until switch is released
-           IOCLR1 = 1<<BUZ;      				  // Turn OFF buzzer
-				   IOSET1 = 1<<LED2;              // Turn ON Green LED to indicate medicine taken
+           IOCLR1 = 1<<BUZ;      		  // Turn OFF buzzer
+		   IOSET1 = 1<<LED2;              // Turn ON Green LED to indicate medicine taken
            CmdLCD(CLEAR_LCD);             // Clear LCD screen
            CmdLCD(GOTO_LINE1_POS0);       // Move cursor to start of first line
            StrLCD("MEDCINE TAKEN");       // Display confirmation message
            delay_ms(1000);                // Delay to show message
-				   CmdLCD(CLEAR_LCD);             // Clear LCD after message
-				   flag = 1;                      // Set flag to indicate medicine was taken
-				   break;                         // Exit the while loop
-       }
-       count--;                           // Decrease counter value
-    }
-		if(flag == 0)                         // If medicine was NOT taken within time
-		{
-       IOCLR1 = 1<<BUZ;                   // Turn OFF buzzer
-       CmdLCD(CLEAR_LCD);                 // Clear LCD screen
-       CmdLCD(GOTO_LINE1_POS0);           // Move cursor to first line
-       StrLCD("MEDICINE");                // Display warning message
-       CmdLCD(GOTO_LINE2_POS0);           // Move cursor to second line
-       StrLCD("NOT TAKEN");               // Display warning message
-       delay_ms(1000);                    // Delay to show warning
-       CmdLCD(CLEAR_LCD);                 // Clear LCD screen
+		   CmdLCD(CLEAR_LCD);             // Clear LCD after message
+		   flag = 1;                      // Set flag to indicate medicine was taken
+		   break;                         // Exit the while loop
+        }
+        count--;                           // Decrease counter value
+     }
+	   if(flag == 0)                         // If medicine was NOT taken within time
+	   {
+           IOCLR1 = 1<<BUZ;                   // Turn OFF buzzer
+           CmdLCD(CLEAR_LCD);                 // Clear LCD screen
+      	   CmdLCD(GOTO_LINE1_POS0);           // Move cursor to first line
+           StrLCD("MEDICINE");                // Display warning message
+           CmdLCD(GOTO_LINE2_POS0);           // Move cursor to second line
+           StrLCD("NOT TAKEN");               // Display warning message
+           delay_ms(1000);                    // Delay to show warning
+           CmdLCD(CLEAR_LCD);                 // Clear LCD screen
 
-       IOSET1 = 1<<LED1;                   // Turn ON Red LED to indicate missed medicine
+           IOSET1 = 1<<LED1;                   // Turn ON Red LED to indicate missed medicine
 		}
 }
+
 
