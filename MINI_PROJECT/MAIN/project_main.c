@@ -23,7 +23,7 @@ extern s32 set_t,set_m,set_s;
 
 int main()
 {
-	 IODIR1 |= (1<<BUZ)|(1<<LED);      // Configure buzzer and LED pins as OUTPUT
+	 IODIR1 |= (1<<BUZ)|(1<<LED1)|(1<<LED2); // Configure buzzer and LED pins as OUTPUT
 	
 	 IODIR0 &= ~(1 << 16)|(1 << 17);   // Configure switches connected to P0.16 and P0.17 as INPUT
 	 
