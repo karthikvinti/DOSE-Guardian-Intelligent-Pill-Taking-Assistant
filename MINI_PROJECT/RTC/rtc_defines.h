@@ -24,6 +24,7 @@
 #define SW1  16        // Input switch 1 pin number
 #define SW2  17        // Input switch 2 pin number
 #define BUZ  25        // Output pin for buzzer control
-#define LED  26        // Output pin for LED indication
+#define LED1 26        // Output pin for LED indication
+#define LED2 27        // Output pin for LED indication 
 
 #endif                 // End of RTC_DEFINES_H

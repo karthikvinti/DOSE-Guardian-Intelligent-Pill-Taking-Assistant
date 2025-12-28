@@ -699,6 +699,7 @@ void set_med_time()
 													CmdLCD(GOTO_LINE2_POS0+4);   // Move cursor to middle of line 2
 													StrLCD("TIME SET");          // Display confirmation message
 													delay_ms(700);               // Delay so user can read message
+													IOCLR1 = (1<<LED1)|(1<<LED2); // Clearing the two LED's
 								          return ;                     // Exit function after saving time
 														
 							 default : CmdLCD(CLEAR_LCD);            // Clear LCD screen
@@ -750,7 +751,8 @@ void match_time()
        if(!(READBIT(IOPIN0,17)))          // Check if medicine confirmation switch is pressed
        {
            while(!(READBIT(IOPIN0,17)));  // Wait until switch is released
-           IOCLR1 = 1<<BUZ;               // Turn OFF buzzer
+           IOCLR1 = 1<<BUZ;      				  // Turn OFF buzzer
+				   IOSET1 = 1<<LED2;              // Turn ON Green LED to indicate medicine taken
            CmdLCD(CLEAR_LCD);             // Clear LCD screen
            CmdLCD(GOTO_LINE1_POS0);       // Move cursor to start of first line
            StrLCD("MEDCINE TAKEN");       // Display confirmation message
@@ -772,6 +774,6 @@ void match_time()
        delay_ms(1000);                    // Delay to show warning
        CmdLCD(CLEAR_LCD);                 // Clear LCD screen
 
-       IOSET1 = 1<<LED;                   // Turn ON LED to indicate missed medicine
+       IOSET1 = 1<<LED1;                   // Turn ON Red LED to indicate missed medicine
 		}
 }
