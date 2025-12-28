@@ -743,8 +743,8 @@ void match_time()
     StrLCD("TIME FOR");         // Display alert message
 	CmdLCD(GOTO_LINE2_POS0+4);  // Move cursor to center of second line
 	StrLCD("MEDICINE");         // Display alert message
-    delay_ms(700);              // Delay so user can read message
-    IOSET1 = 1<<BUZ;            // Turn ON buzzer to alert user
+	IOSET1 = 1<<BUZ;            // Turn ON buzzer to alert user
+    delay_ms(1000);              // Delay so user can read message
     while(count)                // Loop until counter becomes zero
     {
        delay_ms(100);           // Wait 100 ms between checks
@@ -756,14 +756,13 @@ void match_time()
            CmdLCD(CLEAR_LCD);             // Clear LCD screen
            CmdLCD(GOTO_LINE1_POS0);       // Move cursor to start of first line
            StrLCD("MEDCINE TAKEN");       // Display confirmation message
-           delay_ms(1000);                // Delay to show message
 		   CmdLCD(CLEAR_LCD);             // Clear LCD after message
 		   flag = 1;                      // Set flag to indicate medicine was taken
 		   break;                         // Exit the while loop
         }
-        count--;                           // Decrease counter value
+        count--;                          // Decrease counter value
      }
-	   if(flag == 0)                         // If medicine was NOT taken within time
+	   if(flag == 0)                      // If medicine was NOT taken within time
 	   {
            IOCLR1 = 1<<BUZ;                   // Turn OFF buzzer
            CmdLCD(CLEAR_LCD);                 // Clear LCD screen
@@ -771,11 +770,11 @@ void match_time()
            StrLCD("MEDICINE");                // Display warning message
            CmdLCD(GOTO_LINE2_POS0);           // Move cursor to second line
            StrLCD("NOT TAKEN");               // Display warning message
+		   IOSET1 = 1<<LED1;                   // Turn ON Red LED to indicate missed medicine
            delay_ms(1000);                    // Delay to show warning
            CmdLCD(CLEAR_LCD);                 // Clear LCD screen
-
-           IOSET1 = 1<<LED1;                   // Turn ON Red LED to indicate missed medicine
 		}
 }
+
 
 
