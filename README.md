@@ -56,12 +56,12 @@ RTC, Keypad, and Switches provide inputs to the LPC2148 microcontroller. The con
 
 ## 📸LCD Display 
 ### 🖥️ Full Proteus Setup
-<img width="1282" height="905" alt="image" src="https://github.com/user-attachments/assets/418937d8-673c-49d0-a0d0-2fbfb58ca6c0" />
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/b5377e6c-5a3c-4192-ac6a-adbeb46b2957" />
 
 ### ⌚ Main Menu 
 <img width="857" height="350" alt="image" src="https://github.com/user-attachments/assets/3d92371f-d09a-4b0c-a3d7-d1415a804342" />
 
-### ✏️ Editing Menu (Time Configuration)
+### ✏️ Editing Time & Set Medicine Time
 > **Right ( > )** → Move between HH • MM • SS  
 >  
 > **Left ( < )** → Move backward  
@@ -75,6 +75,26 @@ RTC, Keypad, and Switches provide inputs to the LPC2148 microcontroller. The con
 - Setting ON/OFF Time at **00:00** behaves differently:  
   - As **Day Start** for ON Time  
   - As **Day End** for OFF Time  
+
+## 💊 Medicine Time 
+<img width="1919" height="1079" alt="Screenshot 2025-12-28 140227" src="https://github.com/user-attachments/assets/4f5d0f78-9dd6-49fd-b9da-33810700077b" />  
+
+ - LCD shows **TIME FOR MEDICINE**
+ - Buzzer turns ON 🔔
+
+## ⏰ Switch Pressed
+<img width="1919" height="1079" alt="Screenshot 2025-12-28 140247" src="https://github.com/user-attachments/assets/bf4efd0f-fc6f-4501-bbdd-60b8ba0b0262" />
+
+- When Switch is press within medicine time
+- Buzzer turn OFF 🔕
+- Green LED glows for attention 💡
+
+## ⌛ Switch Not Pressed
+<img width="1919" height="1079" alt="Screenshot 2025-12-28 141057" src="https://github.com/user-attachments/assets/dc4d8e7f-afeb-4030-8bdd-0411b140cc12" />
+
+- When Switch is not pressed within time
+- Buzzer turn OFF 🔕
+- Red LED glows for attention 💡
 
 ## 🔑Keypad Controls
 
